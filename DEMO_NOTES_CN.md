@@ -36,7 +36,9 @@
 1. Mandelbrot 调用 `escape_counts(torch.zeros_like(c), c, ...)`。
 2. Julia 调用 `escape_counts(initial_z, julia_constant, ...)`。
 
-现场可改：把 Julia 常量从 `-0.8 + 0.156j` 改成 `-0.4 + 0.6j`，比较形状。
+学生实验：已把 Julia 常量从 `-0.8 + 0.156j` 改成 `-0.4 + 0.6j`。新图不连通，
+由多个岛状簇组成；新旧图都具有绕原点旋转 180° 的中心对称性。现场如果被要求
+修改参数，可以改回 `-0.8 + 0.156j`，并解释原图更连续、卷曲且带有螺旋结构。
 
 ## Part 3：Sierpinski carpet
 

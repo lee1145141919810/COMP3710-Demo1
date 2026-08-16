@@ -10,7 +10,7 @@ This project follows the **Demo 1 Sheet v2.31 (3 August 2026)** and produces all
 
 2. **Part 2 (3 marks)**
    - A high-resolution zoom into Mandelbrot “Seahorse Valley”.
-   - A Julia set using the constant `c = -0.8 + 0.156i`.
+   - A Julia set using the student-tested constant `c = -0.4 + 0.6i`.
 
 3. **Part 3 coding component (6 marks)**
    - A Sierpinski carpet implemented with vectorised PyTorch tensor operations.
@@ -43,13 +43,35 @@ The program automatically uses a CUDA GPU when available and otherwise uses the 
 - `part3_sierpinski_carpet.png`
 - `part3_box_counting.png`
 
+## Verified run
+
+On 17 August 2026, both commands below completed successfully in a clean local
+Python environment using PyTorch 2.13.0 on the CPU:
+
+```powershell
+python demo1_fractals.py --quick
+python demo1_fractals.py
+```
+
+Both runs generated all five expected images. The measured box-counting
+dimension was `1.892789`, matching the theoretical value
+`log(8) / log(3) = 1.892789`. See `VERIFICATION_REPORT.md` for the exact checks.
+
+The student later ran quick mode personally and changed the Julia constant from
+`-0.8 + 0.156i` to `-0.4 + 0.6i`. The updated set became disconnected and
+formed multiple centrally symmetric island-like clusters. The original image
+is preserved as `outputs/part2_julia_original.png` for comparison.
+
 ## Before the marked practical
 
 - Run the quick version first and open every generated image.
 - Run the full version on a GPU-equipped lab computer.
 - Confirm the Sierpinski carpet choice with the demonstrator if they require prior approval. It is deliberately different from the Mandelbrot and Julia sets.
 - Complete the Git short course yourself.
-- Create your own GitHub repository, commit this project in several meaningful stages, and push it.
+- Make the GitHub repository public before the marked practical so teaching
+  staff can access the required open-source repository.
+- Show the existing meaningful commit history and be ready to verify ownership
+  of the GitHub account.
 - Update `AI_USAGE_LOG.md` with any new AI prompts or changes you make.
 - Practise the explanations in `DEMO_NOTES_CN.md`; do not present code you cannot explain.
 
