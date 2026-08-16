@@ -176,13 +176,13 @@ def part2_mandelbrot_and_julia(device: torch.device, quick: bool = False) -> Non
     julia_y = (-1.25, 1.25)
     x, y = coordinate_grid(julia_x, julia_y, julia_width, julia_height, device)
     initial_z = torch.complex(x, y)
-    julia_constant = torch.tensor(-0.8 + 0.156j, dtype=torch.complex64, device=device)
+    julia_constant = torch.tensor(-0.4 + 0.6j, dtype=torch.complex64, device=device)
     julia = escape_counts(initial_z, julia_constant, julia_iterations)
     save_escape_time_figure(
         julia,
         julia_iterations,
         (*julia_x, *julia_y),
-        "Julia set for c = -0.8 + 0.156i",
+        "Julia set for c = -0.4 + 0.6i",
         OUTPUT_DIR / "part2_julia.png",
     )
 
