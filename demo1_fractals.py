@@ -142,7 +142,7 @@ def save_escape_time_figure(
     axis.set_title(title)
     axis.set_xlabel("Real axis")
     axis.set_ylabel("Imaginary axis")
-    fig.colorbar(image, ax=axis, label="Iterations before escape")
+    fig.colorbar(image, ax=axis, label="Escape-time count (capped)")
     fig.savefig(output_path, dpi=200)
     plt.close(fig)
 
@@ -220,6 +220,7 @@ def sierpinski_carpet(
         working_x.div_(3, rounding_mode="floor")
         working_y.div_(3, rounding_mode="floor")
 
+    # Sentinel: level+1 means this pixel survived every removal step.
     removal_depth[active] = level + 1
     return active, removal_depth
 
@@ -254,6 +255,10 @@ def box_counting_dimension(mask: torch.Tensor, level: int) -> tuple[np.ndarray, 
 def part3_sierpinski(device: torch.device, level: int) -> None:
     """Render and analyse a vectorised PyTorch Sierpinski carpet."""
     carpet, removal_depth = sierpinski_carpet(level, device)
+    assert carpet.shape == (3**level, 3**level)
+    assert carpet.dtype == torch.bool
+    assert carpet.sum().item() == 8**level
+    assert torch.all(removal_depth[carpet] == level + 1).item()
     inverse_scales, counts, estimated_dimension = box_counting_dimension(carpet, level)
     theoretical_dimension = math.log(8.0) / math.log(3.0)
 
@@ -271,9 +276,13 @@ def part3_sierpinski(device: torch.device, level: int) -> None:
         origin="lower",
         interpolation="nearest",
     )
-    axes[1].set_title("Removal depth visualisation")
+    axes[1].set_title(f"Removal iteration ({level+1} = retained)")
     axes[1].set_axis_off()
-    fig.colorbar(depth_image, ax=axes[1], label="Iteration removed (survivors last)")
+    fig.colorbar(
+        depth_image,
+        ax=axes[1],
+        label=f"Removal iteration; {level+1} means retained",
+    )
     fig.savefig(OUTPUT_DIR / "part3_sierpinski_carpet.png", dpi=200)
     plt.close(fig)
 

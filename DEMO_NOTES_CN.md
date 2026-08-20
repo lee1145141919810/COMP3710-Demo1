@@ -111,6 +111,8 @@ full Mandelbrot 的横向 `dx≈7.15e-5`，小于原题的 `0.005`；横向视�
 
 > 坐标的三进制位表示像素在每一层的左/中/右位置。若某一层 x 和 y 的三进制位同时为 1，该像素位于中心格并被删除。代码只对 level 循环；每一层使用 tensor remainder 和 Boolean mask 同时处理所有像素，因此 PyTorch 是算法的主要并行组件。
 
+`removal_depth` 中的 `level+1` 是 sentinel，表示像素经过全部层级后仍被保留；它不表示像素在额外的第 `level+1` 层被删除。
+
 维数分析：
 
 - 每次长度缩小为 `1/3`，保留 8 个副本。
@@ -134,7 +136,7 @@ full Mandelbrot 的横向 `dx≈7.15e-5`，小于原题的 `0.005`；横向视�
 
 > AI 很快给出了基础结构，但 NumPy 转 PyTorch 不只是替换函数名，还要检查 dtype、device、GPU-to-CPU plotting 和是否需要 autograd。对 Mandelbrot/Julia 还要检查 z₀、固定/变化的参数、逃逸阈值和有限迭代颜色。最终项目使用明确的 `initial_z/constant_c`、整数 `counts`、quick/full 模式、第二种可视化和 box-counting 验证。
 
-必须准确区分 student-run 和 AI-operated checks。目前已有记录表明学生亲自运行 quick mode 并修改/比较 Julia 参数；其他项目只有在本人完成后才能声称“我亲自运行”。
+必须准确区分 student-run 和 AI-operated checks。学生已于 21 August 2026 在 Google Colab 亲自 Run All 11 个代码单元、检查五组图，并完成 Gabor frequency/orientation、Mandelbrot span、Julia constant 与 Sierpinski level 实验；本地自动断言和最终发布前回归检查仍属于 AI-operated verification。
 
 ## 高频追问
 
@@ -152,9 +154,9 @@ full Mandelbrot 的横向 `dx≈7.15e-5`，小于原题的 `0.005`；横向视�
 
 - [ ] 取得并保存 teaching-staff 对 Sierpinski carpet 的批准。
 - [ ] 准备 Git Introduction short-course 完成证明（4 marks）。
-- [ ] 亲自 Run All notebook 或运行脚本并检查五张图。
-- [ ] 亲自做一次 Mandelbrot bounds/spacing 实验并记录观察。
-- [ ] 更新全部 AI prompts、输出/推理与修改记录。
+- [x] 亲自 Run All notebook 并检查五组图。
+- [x] 亲自做一次 Mandelbrot bounds/spacing 实验并记录观察。
+- [x] 更新本轮 AI prompts、输出/推理与参数实验记录。
 - [ ] 准备原始 AI conversation link 或 prompt history。
 - [ ] 登录 GitHub 并能展示 commit history。
 - [ ] 确认 teaching staff 是否要求明确的开源 licence。

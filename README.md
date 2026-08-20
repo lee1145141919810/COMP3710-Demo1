@@ -27,7 +27,10 @@ The Sierpinski carpet is mathematically different from the Mandelbrot and Julia 
 
 Open `COMP3710_Demo1.ipynb` in Jupyter or Google Colab and run the cells from top to bottom. The notebook keeps the main formulas, the official `ns` variable comparison, spacing calculation and live parameter exercises visible for the practical demonstration.
 
-The notebook was prepared with AI assistance. The student must review it, run it personally and document any later changes before presenting it.
+The notebook was prepared with AI assistance. On 21 August 2026 the student
+personally ran all 11 code cells in Google Colab, inspected all five figure
+groups and performed the parameter experiments summarised below. The student
+must still understand and be able to explain every presented line.
 
 ### Python script
 
@@ -69,16 +72,25 @@ On 17 August 2026, both the quick and full commands completed successfully in a 
 
 The student later ran quick mode personally, changed the Julia constant from `-0.8 + 0.156i` to `-0.4 + 0.6i`, and compared the original and updated images. The original remains at `outputs/part2_julia_original.png`.
 
+On 21 August 2026 the student also personally ran the interview notebook from
+top to bottom in Google Colab using PyTorch `2.11.0+cpu`. The student changed
+Gabor frequency and orientation, recomputed a Mandelbrot zoom by changing
+`practice_span_x` from `0.05` to `0.025`, compared Julia constants
+`-0.4+0.6i` and `-0.8+0.156i`, and changed the Sierpinski level from 5 to 6.
+Both reported box-counting values were `1.892789`. See `AI_USAGE_LOG.md` for
+the distinction between student-operated and AI-operated verification.
+
 ## Before the marked practical
 
 - [ ] Obtain and retain teaching-staff approval for the Sierpinski carpet.
 - [ ] Be ready to show completion of the Git Introduction short course.
-- [ ] Personally run the notebook or script from start to finish on the intended machine.
-- [ ] Personally change and record at least one Mandelbrot zoom or spacing experiment.
-- [ ] Open all five generated images and explain what each one demonstrates.
+- [x] Personally run the notebook from start to finish in Google Colab.
+- [x] Personally change and record a Mandelbrot zoom/spacing experiment.
+- [x] Open all five figure groups and inspect their outputs.
 - [ ] Keep GitHub logged in and be ready to show the repository and commit history.
-- [ ] Keep the repository public for demonstrator access.
-- [ ] Review `AI_USAGE_LOG.md`, add every later AI interaction and retain original prompt evidence or a shareable conversation history.
+- [x] Keep the repository public for demonstrator access (verified 21 August 2026).
+- [x] Add the 21 August Colab verification and parameter experiments to `AI_USAGE_LOG.md`.
+- [ ] Retain original prompt evidence or a shareable conversation history.
 - [ ] Practise a three-minute summary and live changes to Gabor frequency, Mandelbrot bounds, Julia `c` and Sierpinski level.
 - [ ] Confirm with the teaching staff whether an explicit open-source licence is required; no licence should be selected without understanding its terms.
 

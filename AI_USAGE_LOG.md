@@ -361,9 +361,85 @@ Zoom relative to the repository view: 2.0x
 
 The AI also visually inspected the new plot and confirmed that it displays
 recomputed boundary detail rather than a blank or constant image. This remains
-AI-operated validation. The student has not yet supplied a personal Run All
-result or a personally recorded `0.05 -> 0.025` zoom experiment, so those
-checklist items remain incomplete.
+AI-operated validation. At the time of Session 8, the student had not yet
+supplied a personal Run All result or a personally recorded `0.05 -> 0.025`
+zoom experiment; Session 9 below records their later completion.
 
 No pull-request merge, ready-for-review transition, teaching-staff message,
 course submission or claim of student completion was performed.
+
+## Session 9 - 21 August 2026
+
+### Related student prompts and reports (original wording)
+
+> 还有4个小时 教我如何运行和解释代码 完善我的github
+
+> PyTorch: 2.11.0+cpu  
+> Device: cpu  
+> Estimated dimension : 1.892789
+
+> 更卷曲、视觉上更连续 分支变多 关于中心对称
+
+> Estimated dimension : 1.892789  
+> Theoretical log(8)/log(3): 1.892789
+
+### Student-operated Colab verification
+
+The student personally opened the interview notebook in Google Colab, ran all
+11 code cells from top to bottom, reported no red errors, and inspected all five
+figure groups. The reported environment was PyTorch `2.11.0+cpu` on `cpu`.
+This is student-operated evidence reported in the conversation; it is distinct
+from the earlier AI-operated validation.
+
+### Student-operated parameter experiments
+
+The student personally performed and reported these changes:
+
+1. **Gabor frequency:** changed `frequency` from `0.75` to `1.5` while keeping
+   `angle=30°`. The Gaussian remained unchanged, while the cosine and localised
+   Gabor stripes became denser.
+2. **Gabor orientation:** restored `frequency=0.75` and changed `angle` from
+   `30°` to `60°`. The printed result was
+   `f_x=0.3750, f_y=0.6495, |f|=0.7500`; the frequency-vector magnitude stayed
+   constant while its components and the stripe orientation changed.
+3. **Mandelbrot zoom:** changed `practice_span_x` from `0.05` to `0.025` at the
+   same centre. Colab printed
+   `x=(-0.7825,-0.7575000000000001)`,
+   `y=(0.06048329355608592,0.07951670644391409)`,
+   `dx=dy=5.967e-05`, and a `4.0x` zoom relative to the repository view. The
+   image contained a black unresolved-at-the-cap region on the left and
+   recomputed coloured boundary detail with small spiral branches on the right.
+   Black pixels were not treated as proof of mathematical set membership.
+4. **Julia constant:** changed `c` from `-0.4+0.6i` to `-0.8+0.156i`. The
+   student's observation was: `更卷曲、视觉上更连续，分支变多，关于中心对称`.
+   This was refined to “more curled, with more repeated branches, visually more
+   continuous, and approximately 180-degree rotationally symmetric.” A finite
+   rendered image was not treated as proof of mathematical connectedness.
+5. **Sierpinski level:** changed `level` from `5` to `6`. The image gained one
+   finer self-similar level; the side length changed from `243` to `729`, total
+   pixels increased by a factor of 9, and retained pixels by a factor of 8. The
+   student reported both estimated and theoretical dimensions as `1.892789`.
+
+The AI preserved local screenshots and SHA-256 hashes as supporting evidence;
+they contain only generated plots and are not required in the public repository.
+
+### Issues found and corrections prepared by the AI
+
+- Added deterministic notebook cell IDs and high-value shape, dtype, spacing,
+  non-constant-output, survivor-count and dimension assertions.
+- Clarified that `level+1` in `removal_depth` is a sentinel for pixels retained
+  through all levels, not an additional removal iteration.
+- Changed escape plot labels to state that the displayed count is capped by the
+  finite iteration limit.
+- Clarified that `torch.where` freezes escaped state updates but the current
+  implementation still evaluates `candidate` over the whole tensor.
+- Kept the Sierpinski choice and teaching-staff approval visibly pending.
+
+The AI then executed the revised 11-cell notebook locally on a CPU. It completed
+without a code error and produced five PNG display outputs. This final check was
+AI-operated and is not represented as a student-run test.
+
+No merge into `main`, course submission, approval claim or teaching-staff
+message was performed. The student reported that the Git short course was
+complete, but a completion-page screenshot or certificate had not yet been
+reviewed in this session.
