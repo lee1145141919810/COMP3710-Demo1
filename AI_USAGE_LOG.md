@@ -318,3 +318,52 @@ session was recorded, so the corresponding checklist items remain incomplete.
 
 No merge, ready-for-review transition, teaching-staff message, course
 submission or claim of student completion was performed in this session.
+
+## Session 8 - 21 August 2026
+
+### Related student instruction (previously recorded)
+
+> 现在一步一步带我完成所有步骤并且周密准备
+
+### Live Mandelbrot zoom rehearsal improvement
+
+While checking whether the interview notebook supported the requested live
+parameter changes, the AI found that the existing zoom rehearsal cell computed
+and printed new bounds but did not actually resample, rerun the escape-time
+iteration or display the resulting Mandelbrot image.
+
+The AI updated that existing code cell without adding another code cell. It now:
+
+- exposes `practice_span_x` and `practice_iterations` as rehearsal parameters;
+- computes bounds around the same complex-plane centre;
+- uses `(height-1)/(width-1)` so the horizontal and vertical sample spacing
+  are equal;
+- prints the new bounds, `dx`, `dy` and zoom factor;
+- creates a new coordinate tensor grid, reruns `escape_counts`, and plots the
+  recomputed Mandelbrot view.
+
+Changing `practice_span_x` from `0.05` to `0.025` therefore performs a
+real additional two-times zoom at the same centre rather than resizing an
+existing image.
+
+### AI-operated validation
+
+The AI executed all 11 code cells in the revised notebook in an isolated CPU
+environment. The run completed without code errors, produced five PNG display
+outputs and reported for the default practice zoom:
+
+```text
+practice x limits: (-0.795, -0.745)
+practice y limits: (0.05096658711217184, 0.08903341288782818)
+dx=1.193e-04, dy=1.193e-04
+Zoom relative to the repository view: 2.0x
+```
+
+The AI also visually inspected the new plot and confirmed that it displays
+recomputed boundary detail rather than a blank or constant image. This remains
+AI-operated validation. The student has not yet supplied a personal Run All
+result or a personally recorded `0.05 -> 0.025` zoom experiment, so those
+checklist items remain incomplete.
+
+No pull-request merge, ready-for-review transition, teaching-staff message,
+course submission or claim of student completion was performed.
