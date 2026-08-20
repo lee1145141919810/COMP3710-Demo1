@@ -204,3 +204,242 @@ the CPU, regenerated all five current output images, and again reported a
 measured and theoretical box-counting dimension of `1.892789`. The original
 Julia image remains preserved as `outputs/part2_julia_original.png`. This was
 an AI-operated publication check and is not presented as a student-run test.
+
+## Session 6 - 21 August 2026
+
+### Student prompt (original wording)
+
+> 帮我准备comp3710的面试 有已经参加过面试的人给了如下提示：代码里面可以有注释 建议你用Jupyter notebook，别用.py pytorch和numpy区别，tensor作用 task2的代码里面那个ns有什么作用 如何放大局部 julia set和Mandelbrot的区别 可能会考你sine wave的频率修改，就是f_x，f_y啥的 gabor filter原理和作用 我目前的成果在我的github里
+
+The student later offered the exact course requirements and uploaded:
+
+- `COMP3710_Lab_1_2026.pdf` (Lab Demonstration 1, Version 2.31)
+- `COMP3710_Demo_rubric_v2_final.pdf` (Demonstrations Marking Scheme, Version 2.0)
+
+### Context inspected by the AI
+
+The AI inspected the current public GitHub repository `lee1145141919810/COMP3710-Demo1`, including:
+
+- `demo1_fractals.py`
+- `README.md`
+- `DEMO_NOTES_CN.md`
+- `AI_USAGE_LOG.md`
+- `VERIFICATION_REPORT.md`
+- declared dependencies and generated output file list
+
+The AI then extracted and visually reviewed all 9 pages of the Lab Sheet and all 3 pages of the Demonstrations Marking Scheme.
+
+### AI assistance and reasoning summary
+
+The AI prepared three local interview-support artifacts:
+
+1. an annotated Jupyter notebook organised for parameter changes and oral explanation;
+2. a Chinese interview guide with concise and expanded answers;
+3. a requirement-by-requirement rubric audit.
+
+The preparation focused on the topics reported by previous students and mapped them to the student's actual variable names and functions. Important findings included:
+
+- The Lab Sheet variable `ns` is a per-pixel counter. Each iteration adds the Boolean `not_diverged` mask, so a larger value means the orbit stayed within the threshold for more iterations. The student's implementation calls the equivalent variable `counts`.
+- The Lab Sheet uses `ns = torch.zeros_like(z)`, so `ns` inherits a complex dtype although its imaginary component remains zero. The student's integer `counts` more clearly represents its purpose.
+- The Lab Sheet's `z`, `zs`, `zs_`, `not_diverged`, and `ns` correspond to the student's `constant_c`, current `z`, `candidate`, `active` condition, and `counts` respectively.
+- The student's `torch.linspace` grid is equivalent to controlling NumPy `mgrid` spacing through `dx=(x_max-x_min)/(width-1)`. For the full Mandelbrot output, `dx` is approximately `7.15e-5`, compared with the sheet's `0.005` step, while the horizontal field of view is about 30 times narrower than the standard `[-2,1]` range.
+- The direct `f_x/f_y` sine representation and the repository's `frequency/angle` representation are equivalent through `f_x=f*cos(angle)` and `f_y=f*sin(angle)`.
+- The AI identified the distinction between a frequency vector's direction and the visible stripe direction: the stripes are perpendicular to `(f_x,f_y)`.
+- The AI highlighted that Mandelbrot should be described precisely as bounded versus escaping, rather than assuming every bounded orbit converges to one limit.
+- The AI checked the Lab Sheet's example `c=0.5+0.5i` and found that the canonical orbit from `z_0=0` escapes on iteration 5, with magnitude approximately 3.55.
+- The rubric places 40% of marks on questions, understanding and ownership, while functional code accounts for 20%. The interview materials were therefore revised to emphasise explanation and live modification.
+
+### AI-operated verification
+
+The AI created a temporary isolated Python environment and executed all 11 code cells in the revised interview notebook on the CPU. The run completed without code errors and reported:
+
+```text
+PyTorch: 2.13.0+cpu
+Lab Sheet ns dtype: torch.complex64
+Lab Sheet ns maximum imaginary magnitude: 0.0
+Repository full Mandelbrot dx: approximately 7.148e-5
+Estimated Sierpinski box-counting dimension: 1.892789
+Theoretical log(8)/log(3): 1.892789
+```
+
+This was an AI-operated verification. It must not be represented as a student-run test.
+
+### Risks identified for student follow-up
+
+- Confirm the Sierpinski carpet choice with the teaching staff and retain evidence of approval.
+- Be ready to show completion of the Git Introduction short course.
+- Personally run the interview notebook from start to finish on the intended demo machine.
+- Personally change and record at least one Mandelbrot zoom/bounds or spacing experiment; the existing log field is incomplete.
+- Retain a shareable conversation link or complete prompt history because the rubric states that original AI evidence may be requested.
+- Review and, if appropriate, add these new AI interactions to the repository before the demonstration.
+
+### Student-owned work still required
+
+The student should personally practise the three-minute presentation, answer the mock questions without reading, perform the live parameter modifications and verify all outputs.
+
+After the student explicitly authorised necessary repository edits, the AI created the branch `codex/interview-prep-20260821` and committed the reviewed notebook and documentation changes to that branch. The default branch was not changed, and no pull request, merge, teaching-staff message or course submission was performed. The student still needs to review the branch and personally verify that every statement matches their actions before authorising any merge.
+
+## Session 7 - 21 August 2026
+
+### Student prompts (original wording)
+
+> 创建 draft PR
+
+> 现在一步一步带我完成所有步骤并且周密准备
+
+### Draft pull request action
+
+After the student's explicit request, the AI created draft pull request
+[#2](https://github.com/lee1145141919810/COMP3710-Demo1/pull/2) from
+`codex/interview-prep-20260821` into `main`. At creation, the pull request
+was open, draft, mergeable and unmerged. The default branch was not changed.
+The pull request was intentionally left as a draft because student-owned
+verification, approval and evidence tasks were still incomplete.
+
+### Prompt-history supporting PDF
+
+The AI compiled the complete repository `AI_USAGE_LOG.md` snapshot at commit
+`fb1958a341b0c8d5eae37c2a99489d15175778e3` into a local ten-page PDF named
+`COMP3710_prompt_history.pdf`. The PDF includes the source commit, a content
+hash, an evidence-status warning and a chronology note. The AI checked its text
+layer and visually inspected all rendered pages.
+
+The PDF was not uploaded to GitHub and is supporting evidence only. It does not
+replace an original shareable conversation link if teaching staff request one,
+and AI-operated verification must not be represented as student-run work.
+
+### Student-run verification status
+
+The AI gave the student a Colab link pinned to the reviewed notebook commit and
+asked the student to restart the runtime, run all 11 code cells, check every
+figure and report the PyTorch version, device, `ns` dtype, Mandelbrot spacing
+and box-counting values. No student-run result had been received when this
+session was recorded, so the corresponding checklist items remain incomplete.
+
+No merge, ready-for-review transition, teaching-staff message, course
+submission or claim of student completion was performed in this session.
+
+## Session 8 - 21 August 2026
+
+### Related student instruction (previously recorded)
+
+> 现在一步一步带我完成所有步骤并且周密准备
+
+### Live Mandelbrot zoom rehearsal improvement
+
+While checking whether the interview notebook supported the requested live
+parameter changes, the AI found that the existing zoom rehearsal cell computed
+and printed new bounds but did not actually resample, rerun the escape-time
+iteration or display the resulting Mandelbrot image.
+
+The AI updated that existing code cell without adding another code cell. It now:
+
+- exposes `practice_span_x` and `practice_iterations` as rehearsal parameters;
+- computes bounds around the same complex-plane centre;
+- uses `(height-1)/(width-1)` so the horizontal and vertical sample spacing
+  are equal;
+- prints the new bounds, `dx`, `dy` and zoom factor;
+- creates a new coordinate tensor grid, reruns `escape_counts`, and plots the
+  recomputed Mandelbrot view.
+
+Changing `practice_span_x` from `0.05` to `0.025` therefore performs a
+real additional two-times zoom at the same centre rather than resizing an
+existing image.
+
+### AI-operated validation
+
+The AI executed all 11 code cells in the revised notebook in an isolated CPU
+environment. The run completed without code errors, produced five PNG display
+outputs and reported for the default practice zoom:
+
+```text
+practice x limits: (-0.795, -0.745)
+practice y limits: (0.05096658711217184, 0.08903341288782818)
+dx=1.193e-04, dy=1.193e-04
+Zoom relative to the repository view: 2.0x
+```
+
+The AI also visually inspected the new plot and confirmed that it displays
+recomputed boundary detail rather than a blank or constant image. This remains
+AI-operated validation. At the time of Session 8, the student had not yet
+supplied a personal Run All result or a personally recorded `0.05 -> 0.025`
+zoom experiment; Session 9 below records their later completion.
+
+No pull-request merge, ready-for-review transition, teaching-staff message,
+course submission or claim of student completion was performed.
+
+## Session 9 - 21 August 2026
+
+### Related student prompts and reports (original wording)
+
+> 还有4个小时 教我如何运行和解释代码 完善我的github
+
+> PyTorch: 2.11.0+cpu  
+> Device: cpu  
+> Estimated dimension : 1.892789
+
+> 更卷曲、视觉上更连续 分支变多 关于中心对称
+
+> Estimated dimension : 1.892789  
+> Theoretical log(8)/log(3): 1.892789
+
+### Student-operated Colab verification
+
+The student personally opened the interview notebook in Google Colab, ran all
+11 code cells from top to bottom, reported no red errors, and inspected all five
+figure groups. The reported environment was PyTorch `2.11.0+cpu` on `cpu`.
+This is student-operated evidence reported in the conversation; it is distinct
+from the earlier AI-operated validation.
+
+### Student-operated parameter experiments
+
+The student personally performed and reported these changes:
+
+1. **Gabor frequency:** changed `frequency` from `0.75` to `1.5` while keeping
+   `angle=30°`. The Gaussian remained unchanged, while the cosine and localised
+   Gabor stripes became denser.
+2. **Gabor orientation:** restored `frequency=0.75` and changed `angle` from
+   `30°` to `60°`. The printed result was
+   `f_x=0.3750, f_y=0.6495, |f|=0.7500`; the frequency-vector magnitude stayed
+   constant while its components and the stripe orientation changed.
+3. **Mandelbrot zoom:** changed `practice_span_x` from `0.05` to `0.025` at the
+   same centre. Colab printed
+   `x=(-0.7825,-0.7575000000000001)`,
+   `y=(0.06048329355608592,0.07951670644391409)`,
+   `dx=dy=5.967e-05`, and a `4.0x` zoom relative to the repository view. The
+   image contained a black unresolved-at-the-cap region on the left and
+   recomputed coloured boundary detail with small spiral branches on the right.
+   Black pixels were not treated as proof of mathematical set membership.
+4. **Julia constant:** changed `c` from `-0.4+0.6i` to `-0.8+0.156i`. The
+   student's observation was: `更卷曲、视觉上更连续，分支变多，关于中心对称`.
+   This was refined to “more curled, with more repeated branches, visually more
+   continuous, and approximately 180-degree rotationally symmetric.” A finite
+   rendered image was not treated as proof of mathematical connectedness.
+5. **Sierpinski level:** changed `level` from `5` to `6`. The image gained one
+   finer self-similar level; the side length changed from `243` to `729`, total
+   pixels increased by a factor of 9, and retained pixels by a factor of 8. The
+   student reported both estimated and theoretical dimensions as `1.892789`.
+
+The AI preserved local screenshots and SHA-256 hashes as supporting evidence;
+they contain only generated plots and are not required in the public repository.
+
+### Issues found and corrections prepared by the AI
+
+- Added deterministic notebook cell IDs and high-value shape, dtype, spacing,
+  non-constant-output, survivor-count and dimension assertions.
+- Clarified that `level+1` in `removal_depth` is a sentinel for pixels retained
+  through all levels, not an additional removal iteration.
+- Changed escape plot labels to state that the displayed count is capped by the
+  finite iteration limit.
+- Clarified that `torch.where` freezes escaped state updates but the current
+  implementation still evaluates `candidate` over the whole tensor.
+- Kept the Sierpinski choice and teaching-staff approval visibly pending.
+
+The AI then executed the revised 11-cell notebook locally on a CPU. It completed
+without a code error and produced five PNG display outputs. This final check was
+AI-operated and is not represented as a student-run test.
+
+No merge into `main`, course submission, approval claim or teaching-staff
+message was performed. The student reported that the Git short course was
+complete, but a completion-page screenshot or certificate had not yet been
+reviewed in this session.
