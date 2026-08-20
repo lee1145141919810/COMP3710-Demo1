@@ -204,3 +204,77 @@ the CPU, regenerated all five current output images, and again reported a
 measured and theoretical box-counting dimension of `1.892789`. The original
 Julia image remains preserved as `outputs/part2_julia_original.png`. This was
 an AI-operated publication check and is not presented as a student-run test.
+
+## Session 6 - 21 August 2026
+
+### Student prompt (original wording)
+
+> 帮我准备comp3710的面试 有已经参加过面试的人给了如下提示：代码里面可以有注释 建议你用Jupyter notebook，别用.py pytorch和numpy区别，tensor作用 task2的代码里面那个ns有什么作用 如何放大局部 julia set和Mandelbrot的区别 可能会考你sine wave的频率修改，就是f_x，f_y啥的 gabor filter原理和作用 我目前的成果在我的github里
+
+The student later offered the exact course requirements and uploaded:
+
+- `COMP3710_Lab_1_2026.pdf` (Lab Demonstration 1, Version 2.31)
+- `COMP3710_Demo_rubric_v2_final.pdf` (Demonstrations Marking Scheme, Version 2.0)
+
+### Context inspected by the AI
+
+The AI inspected the current public GitHub repository `lee1145141919810/COMP3710-Demo1`, including:
+
+- `demo1_fractals.py`
+- `README.md`
+- `DEMO_NOTES_CN.md`
+- `AI_USAGE_LOG.md`
+- `VERIFICATION_REPORT.md`
+- declared dependencies and generated output file list
+
+The AI then extracted and visually reviewed all 9 pages of the Lab Sheet and all 3 pages of the Demonstrations Marking Scheme.
+
+### AI assistance and reasoning summary
+
+The AI prepared three local interview-support artifacts:
+
+1. an annotated Jupyter notebook organised for parameter changes and oral explanation;
+2. a Chinese interview guide with concise and expanded answers;
+3. a requirement-by-requirement rubric audit.
+
+The preparation focused on the topics reported by previous students and mapped them to the student's actual variable names and functions. Important findings included:
+
+- The Lab Sheet variable `ns` is a per-pixel counter. Each iteration adds the Boolean `not_diverged` mask, so a larger value means the orbit stayed within the threshold for more iterations. The student's implementation calls the equivalent variable `counts`.
+- The Lab Sheet uses `ns = torch.zeros_like(z)`, so `ns` inherits a complex dtype although its imaginary component remains zero. The student's integer `counts` more clearly represents its purpose.
+- The Lab Sheet's `z`, `zs`, `zs_`, `not_diverged`, and `ns` correspond to the student's `constant_c`, current `z`, `candidate`, `active` condition, and `counts` respectively.
+- The student's `torch.linspace` grid is equivalent to controlling NumPy `mgrid` spacing through `dx=(x_max-x_min)/(width-1)`. For the full Mandelbrot output, `dx` is approximately `7.15e-5`, compared with the sheet's `0.005` step, while the horizontal field of view is about 30 times narrower than the standard `[-2,1]` range.
+- The direct `f_x/f_y` sine representation and the repository's `frequency/angle` representation are equivalent through `f_x=f*cos(angle)` and `f_y=f*sin(angle)`.
+- The AI identified the distinction between a frequency vector's direction and the visible stripe direction: the stripes are perpendicular to `(f_x,f_y)`.
+- The AI highlighted that Mandelbrot should be described precisely as bounded versus escaping, rather than assuming every bounded orbit converges to one limit.
+- The AI checked the Lab Sheet's example `c=0.5+0.5i` and found that the canonical orbit from `z_0=0` escapes on iteration 5, with magnitude approximately 3.55.
+- The rubric places 40% of marks on questions, understanding and ownership, while functional code accounts for 20%. The interview materials were therefore revised to emphasise explanation and live modification.
+
+### AI-operated verification
+
+The AI created a temporary isolated Python environment and executed all 11 code cells in the revised interview notebook on the CPU. The run completed without code errors and reported:
+
+```text
+PyTorch: 2.13.0+cpu
+Lab Sheet ns dtype: torch.complex64
+Lab Sheet ns maximum imaginary magnitude: 0.0
+Repository full Mandelbrot dx: approximately 7.148e-5
+Estimated Sierpinski box-counting dimension: 1.892789
+Theoretical log(8)/log(3): 1.892789
+```
+
+This was an AI-operated verification. It must not be represented as a student-run test.
+
+### Risks identified for student follow-up
+
+- Confirm the Sierpinski carpet choice with the teaching staff and retain evidence of approval.
+- Be ready to show completion of the Git Introduction short course.
+- Personally run the interview notebook from start to finish on the intended demo machine.
+- Personally change and record at least one Mandelbrot zoom/bounds or spacing experiment; the existing log field is incomplete.
+- Retain a shareable conversation link or complete prompt history because the rubric states that original AI evidence may be requested.
+- Review and, if appropriate, add these new AI interactions to the repository before the demonstration.
+
+### Student-owned work still required
+
+The student should personally practise the three-minute presentation, answer the mock questions without reading, perform the live parameter modifications and verify all outputs.
+
+After the student explicitly authorised necessary repository edits, the AI created the branch `codex/interview-prep-20260821` and committed the reviewed notebook and documentation changes to that branch. The default branch was not changed, and no pull request, merge, teaching-staff message or course submission was performed. The student still needs to review the branch and personally verify that every statement matches their actions before authorising any merge.
