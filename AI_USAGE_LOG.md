@@ -278,3 +278,43 @@ This was an AI-operated verification. It must not be represented as a student-ru
 The student should personally practise the three-minute presentation, answer the mock questions without reading, perform the live parameter modifications and verify all outputs.
 
 After the student explicitly authorised necessary repository edits, the AI created the branch `codex/interview-prep-20260821` and committed the reviewed notebook and documentation changes to that branch. The default branch was not changed, and no pull request, merge, teaching-staff message or course submission was performed. The student still needs to review the branch and personally verify that every statement matches their actions before authorising any merge.
+
+## Session 7 - 21 August 2026
+
+### Student prompts (original wording)
+
+> 创建 draft PR
+
+> 现在一步一步带我完成所有步骤并且周密准备
+
+### Draft pull request action
+
+After the student's explicit request, the AI created draft pull request
+[#2](https://github.com/lee1145141919810/COMP3710-Demo1/pull/2) from
+`codex/interview-prep-20260821` into `main`. At creation, the pull request
+was open, draft, mergeable and unmerged. The default branch was not changed.
+The pull request was intentionally left as a draft because student-owned
+verification, approval and evidence tasks were still incomplete.
+
+### Prompt-history supporting PDF
+
+The AI compiled the complete repository `AI_USAGE_LOG.md` snapshot at commit
+`fb1958a341b0c8d5eae37c2a99489d15175778e3` into a local ten-page PDF named
+`COMP3710_prompt_history.pdf`. The PDF includes the source commit, a content
+hash, an evidence-status warning and a chronology note. The AI checked its text
+layer and visually inspected all rendered pages.
+
+The PDF was not uploaded to GitHub and is supporting evidence only. It does not
+replace an original shareable conversation link if teaching staff request one,
+and AI-operated verification must not be represented as student-run work.
+
+### Student-run verification status
+
+The AI gave the student a Colab link pinned to the reviewed notebook commit and
+asked the student to restart the runtime, run all 11 code cells, check every
+figure and report the PyTorch version, device, `ns` dtype, Mandelbrot spacing
+and box-counting values. No student-run result had been received when this
+session was recorded, so the corresponding checklist items remain incomplete.
+
+No merge, ready-for-review transition, teaching-staff message, course
+submission or claim of student completion was performed in this session.
