@@ -71,8 +71,13 @@ def part1_gabor(device: torch.device, quick: bool = False) -> None:
 
     angle = math.radians(30.0)
     frequency = 0.75  # cycles per coordinate unit
-    oriented_position = x * math.cos(angle) + y * math.sin(angle)
-    sinusoid = torch.cos(2.0 * math.pi * frequency * oriented_position)
+
+    # Equivalent frequency-vector form: cos(2*pi*(f_x*x + f_y*y)).
+    # The vector magnitude controls stripe density; its direction is normal
+    # to the visible stripes.
+    f_x = frequency * math.cos(angle)
+    f_y = frequency * math.sin(angle)
+    sinusoid = torch.cos(2.0 * math.pi * (f_x * x + f_y * y))
 
     # Modulation: multiplying a Gaussian envelope by a sinusoidal carrier.
     gabor = gaussian * sinusoid
@@ -101,7 +106,8 @@ def escape_counts(
     active = torch.ones(z.shape, dtype=torch.bool, device=z.device)
 
     for _ in range(max_iterations):
-        # Stop updating escaped points to avoid unnecessary work and overflow.
+        # Freeze escaped states so they do not keep growing towards infinity.
+        # candidate is still evaluated for the whole tensor before torch.where.
         candidate = z.square() + constant_c
         z = torch.where(active, candidate, z)
         active = active & (z.abs() <= 2.0)
